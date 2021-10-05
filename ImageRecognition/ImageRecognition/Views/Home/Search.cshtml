@@ -1,0 +1,99 @@
+﻿<!DOCTYPE html>
+
+@using ImageRecognitionModule
+@model IEnumerable<ImageModel>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<html lang="ru" dir="ltr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" media="screen" href="~/Content/search.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+    <title>ImageSearch - Поиск похожих фотографий</title>
+</head>
+
+<body scro>
+
+    <div class="backgroundall"></div>
+    <div class="paneltop">
+        <div class="logopng">
+            <div class="logotxt">ImageSearch</div>
+            <img src="~/Content/logo.png">
+        </div>
+        <div class="aboutus">
+            <a class="lnk" href="/Home/About">О нас</a>
+            <div class="filldatabase"><a class="lnk" href="/Upload/Upload">Для разработчиков</a></div>
+        </div>
+        <img onclick="myFunction()" class="dropbtn" src="~/Content/menu.png">
+        <div id="myDropdown" class="dropdown-content">
+            <a href="/Home/About">О нас</a>
+            <a href="/Upload/Upload">Для разработчиков</a>
+        </div>
+        </img>
+
+        <script>
+            function myFunction() {
+                document.getElementById("myDropdown").classList.toggle("show");
+            }
+            window.onclick = function (event) {
+                if (!event.target.matches('.dropbtn')) {
+                    var dropdowns = document.getElementsByClassName("dropdown-content");
+                    var i;
+                    for (i = 0; i < dropdowns.length; i++) {
+                        var openDropdown = dropdowns[i];
+                        if (openDropdown.classList.contains('show')) {
+                            openDropdown.classList.remove('show');
+                        }
+                    }
+                }
+            }
+        </script>
+
+        <div class="orange-zone">
+            <!--тут вроде должна быть форма-->
+
+            <div class="file-upload">
+                @using (Html.BeginForm("Index", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    <label>
+                        <span>Искать еще!</span>
+                        <input type="file" name="file" onchange="f_send(this.form);" id="upload-file" accept="image/jpeg, image/png">
+
+                    </label>
+                }
+                </div>
+            <!--тут она заканчивается-->
+        </div>
+
+        <div class="blue-zone">
+            <div class="preview">
+                <img src="data:image;base64, @ViewBag.Image" height="175">
+                <div class="description">Результаты поиска: @ViewBag.Count</div>
+                <div class="filename">Для: <br>@ViewBag.FileName</div>
+            </div>
+        </div>
+
+        <div class="result-zone">
+
+            <div class="imagelist"> @Html.Partial("Images", Model)</div>
+            <div class="page-number">
+                <!--ниже кнопочки-->
+                <div class="previous-page"></div>
+                <div class="next-page"></div>
+            </div>
+        </div>
+    </div>
+
+
+
+</body>
+</html>
+
+<script type="text/javascript">
+    function f_send(_form) {
+        _form.submit();
+    }
+</script>

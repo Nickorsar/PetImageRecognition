@@ -1,0 +1,192 @@
+﻿<!DOCTYPE html>
+@using WebApp.Models
+@model IEnumerable<WebApp.Models.Picture>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<html lang="en">
+<head>
+    <title> @ViewBag.Title </title>
+    <link rel="stylesheet" href="~/Content/index.css">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+</head>
+
+<body>
+    <div class="all">
+        <div class="background-field"></div>
+        <div class="line-1"></div>
+        <div class="line-2"></div>
+        <div class="line-3"></div>
+        <div class="line-4"></div>
+        <div class="line-5"></div>
+        <div class="line-6"></div>
+        <div class="line-7"></div>
+        <div class="preview-zone"><div id='file-preview' onclick="openImageWindow"></div></div>
+        <div class="results-zone">
+            @Html.Partial("Images", Model)
+            <script type="text/javascript">   // Отображение картинки в полном размере
+                function openImageWindow(src) // в новом окне браузера
+                {
+   	                var image = new Image();
+   	                image.src = src;
+   	                var width = image.width;
+   	                var height = image.height;
+   	                window.open(src,"Image","width=" + width + ",height=" + height);
+                }
+            </script>
+        </div>
+
+        <style>
+            .preview-zone { /*Стиль для поля предпросмотра изображения*/
+                position: absolute;
+                top: 120px;
+                left: 245px;
+                width: 350px;
+                height: 319px;
+                overflow: scroll;
+                padding: 5px;
+                border: solid 1px black;
+                background: #8f8f8f
+            }
+
+            .results-zone { /*Стиль для поля вывода результатов*/
+                position: absolute;
+                top: 120px;
+                left: 620px;
+                width: 350px;
+                height: 319px;
+                overflow: scroll;
+                padding: 5px;
+                border: solid 1px black;
+                background: #8f8f8f;
+            }
+
+            .file-preview {
+                width: 338px;
+            }
+        </style>
+
+        <div class="text-prev">Your picture</div>
+        <div class="text-res">Recognition results</div>
+
+        <div class="project-name">Image Recognition Service</div>
+        <div class="instruction">
+            There are a short guide how to use our web-service.
+            Firstly, click the "Step 1..." button to select an picture from the local file system.
+            Secondly, click the "Step 2..." button to display recognition results table at the special field.
+            If you want to watch found picture in full size, click it.
+            If you want to fill database, click the "Fill database" button.
+        </div>
+
+        @using (Html.BeginForm("Index", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <div class="file-upload">
+                <label>
+                    <span>Step 1: Choose your photo</span>
+                    <input type="file" name="file" onchange="getFileParam();" id="upload-file" accept="image/jpeg, image/png">
+                </label>
+            </div>
+
+            <div class="file-name">
+                <div id='file-name'>
+                    Filename: *empty*
+                    <script type="text/javascript">
+                        function getFileParam() // Отображение названия файла и превью
+                        {
+                            try
+                            {
+                                var file = document.getElementById('upload-file').files[0];
+                                if (file)
+                                {
+                                    document.getElementById('file-name').innerHTML = 'Filename: ' + file.name;
+
+                                    if (/\.(jpe?g|bmp|gif|png)$/i.test(file.name))
+                                    {
+                                        var elPreview = document.getElementById('file-preview');
+                                        elPreview.innerHTML = '';
+                                        var newImg = document.createElement('img');
+                                        newImg.className = "file-preview";
+
+                                        if (typeof file.getAsDataURL == 'function') {
+                                            if (file.getAsDataURL().substr(0, 11) == 'data:image/')
+                                            {
+                                                newImg.onload = function ()
+                                                {
+                                                    document.getElementById('file-name').innerHTML;
+                                                }
+                                                newImg.setAttribute('src', file.getAsDataURL());
+                                                elPreview.appendChild(newImg);
+                                            }
+                                        }
+                                        else
+                                        {
+                                            var reader = new FileReader();
+                                            reader.onloadend = function (evt)
+                                            {
+                                                if (evt.target.readyState == FileReader.DONE)
+                                                {
+                                                    newImg.onload = function ()
+                                                    {
+                                                        document.getElementById('file-name').innerHTML;
+                                                    }
+
+                                                    newImg.setAttribute('src', evt.target.result);
+                                                    elPreview.appendChild(newImg);
+                                                }
+                                            };
+
+                                            var blob;
+                                            if (file.slice) {
+                                                blob = file.slice(0, file.size);
+                                            }
+                                            else if (file.webkitSlice)
+                                            {
+                                                blob = file.webkitSlice(0, file.size);
+                                            }
+                                            else if (file.mozSlice)
+                                            {
+                                                blob = file.mozSlice(0, file.size);
+                                            }
+                                            reader.readAsDataURL(blob);
+                                        }
+                                    }
+                                }
+                            }
+                            catch (e)
+                            {
+                                var file = document.getElementById('upload-file').value;
+                                file = file.replace(/\\/g, "/").split('/').pop();
+                                document.getElementById('file-name').innerHTML = 'Filename: ' + file;
+                            }
+                        }
+                    </script>
+                </div>
+            </div>
+
+            <div class="file-send">
+                <label>
+                    <span>Step 2: Confirm your choice</span>
+                    <input type="submit" name="submit">
+                </label>
+            </div>
+        }
+
+        <div class="fill_db">
+
+            @using (Html.BeginForm("Upload", "Upload", FormMethod.Get))
+            {
+                <label>
+                    <span>Fill database</span>
+                    <input type="submit" name="submit">
+                </label>
+            }
+        </div>
+
+    </div>
+</body>
+
+</html>

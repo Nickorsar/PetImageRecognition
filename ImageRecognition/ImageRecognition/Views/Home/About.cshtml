@@ -1,0 +1,97 @@
+﻿<!DOCTYPE html>
+<html lang="ru" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" media="screen" href="~/Content/about.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+    <title>ImageSearch - Поиск похожих фотографий</title>
+</head>
+
+<body>
+
+    <div class="backgroundall"></div>
+
+    <div class="paneltop">
+        <div class="logopng">
+            <div class="logotxt">ImageSearch</div>
+            <img src="~/Content/logo.png">
+        </div>
+        <div class="aboutus">
+            <a class="lnk" href="/Home/About">О нас</a>
+            <div class="filldatabase"><a class="lnk" href="/Upload/Upload">Для разработчиков</a></div>
+        </div>
+        <img onclick="myFunction()" class="dropbtn" src="~/Content/menu.png">
+        <div id="myDropdown" class="dropdown-content">
+            <a id="drp" href="/Home/About">О нас</a>
+            <a id="drp " href="/Upload/Upload">Для разработчиков</a>
+        </div>
+        <div class="orange-zone">
+            @using (Html.BeginForm("Index", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                <div class="file-upload">
+                    <label>
+                        <span>Загрузить</span>
+                        <input type="file" name="file" onchange="f_send(this.form);" id="upload-file" accept="image/jpeg, image/png">
+
+                    </label>
+                </div>
+            }
+
+            <div class="white-zone">
+                <div class="info1">
+                    <div class="text1">О проекте</div>
+                    <br>
+                    <div class="text2">
+                        Проект по реализации информационного сервиса по поиску изображений “ImageSearch”
+                        был создан в рамках проекта ГПО ТУСУР.
+                    </div>
+                </div>
+                <div class="info2">
+                    <div class="text3">Команда проекта</div>
+                    <br>
+                    <div class="text4">
+                        • Backend-разработчик: Никита Куприянов<br>
+                        • Frontend-разработчик: Тимофей Толстов<br>
+                        • Android-разработчик: Диас Утепов<br>
+                        • Дизайнер проекта: Евгений Ильин<br>
+                        • Специалист по работе с нейросетью: Егор Дрючин
+                    </div>
+                </div>
+                <img class="tusur" src="~/Content/tusur.png" width="200">
+            </div>
+        </div>
+
+
+    </div>
+
+    <script>
+        function myFunction() {
+            document.getElementById("myDropdown").classList.toggle("show");
+        }
+        window.onclick = function (event) {
+            if (!event.target.matches('.dropbtn')) {
+                var dropdowns = document.getElementsByClassName("dropdown-content");
+                var i;
+                for (i = 0; i < dropdowns.length; i++) {
+                    var openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains('show')) {
+                        openDropdown.classList.remove('show');
+                    }
+                }
+            }
+        }
+    </script>
+
+
+
+</body>
+</html>
+
+
+<script type="text/javascript">
+    function f_send(_form) {
+        _form.submit();
+    }
+</script>

@@ -1,0 +1,15 @@
+﻿@model IEnumerable<ImageRecognitionModule.ImageModel>
+    @{
+        if (Model!= null)
+        {
+            foreach (var picture in Model)
+            {
+                <img src="@picture.path" width="338" onclick = "openImageWindow(this.src);" />
+
+            }
+        }
+    }
+
+
+
+

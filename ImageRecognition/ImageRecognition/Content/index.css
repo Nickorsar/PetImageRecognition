@@ -1,0 +1,262 @@
+.background-field {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 1000px;
+  height: 500px;
+  background: #b8b8b8
+}
+
+/*.preview-zone {
+  position: absolute;
+  top: 120px;
+  left: 245px;
+  width: 350px;
+  height: 330px;
+  background: #8f8f8f
+}
+*/
+
+/*.results-zone {
+    position: absolute;
+    top: 120px;
+    left: 620px;
+    width: 350px;
+    height: 330px;
+    overflow: scroll;
+    padding: 5px;
+    border: solid 1px black;
+    background: #8f8f8f;
+}
+*/
+.text-prev {
+  position: absolute;
+  top: 460px;
+  left: 245px;
+  width: 350px;
+  height: 330px;
+  text-align: center;
+}
+
+.text-res {
+  position: absolute;
+  top: 460px;
+  left: 620px;
+  width: 350px;
+  height: 330px;
+  text-align: center;
+}
+
+
+
+/*---------------------------------------------------*/
+
+.line-1 {
+  border-left: 3px solid #fa5d41;
+  height: 503px;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+}
+
+.line-2 {
+  border-left: 3px solid #fa5d41;
+  height: 503px;
+  position: absolute;
+  left: 215px;
+  top: 0px;
+}
+
+.line-3 {
+  border-left: 3px solid #fa5d41;
+  height: 503px;
+  position: absolute;
+  left: 1000px;
+  top: 0px;
+}
+
+.line-4 {
+  border-top: 3px solid #fa5d41;
+  width: 1000px;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+}
+
+.line-5 {
+  border-top: 3px solid #fa5d41;
+  width: 1000px;
+  position: absolute;
+  left: 0px;
+  top: 90px;
+}
+
+.line-6 {
+  border-top: 3px solid #fa5d41;
+  width: 215px;
+  position: absolute;
+  left: 0px;
+  top: 340px;
+}
+
+.line-7 {
+  border-top: 3px solid #fa5d41;
+  width: 1000px;
+  position: absolute;
+  left: 0px;
+  top: 500px;
+}
+
+/*---------------------------------------------------*/
+
+.project-name {
+  position: absolute;
+  top: 20px;
+  left: 60px;
+  width: 100px;
+  height: 40px;
+  text-align: center;
+
+}
+
+.instruction {
+  position: absolute;
+  top: 20px;
+  left: 230px;
+  width: 770px;
+  height: 40px;
+}
+
+/*---------------------------------------------------*/
+
+.file-upload input[type="file"] {
+  display: none;
+}
+
+/*Задаём параметры кнопки*/
+.file-upload {
+  position: absolute;
+    top: 125px;
+    left: 110px;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+  overflow: hidden;
+  width: 150px;
+  height: 40px;
+  background: #fa5d41;
+  color: #fff;
+  text-align: center;
+}
+
+/* Задаём цвет при наведении курсора */
+.file-upload:hover {
+background: #fc9381;
+}
+
+/* Растягиваем label на всю область блока .file-upload */
+.file-upload label {
+display: block;
+position: relative;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+cursor: pointer;
+}
+
+/* стиль текста на кнопке*/
+.file-upload span {
+line-height: 20px;
+font-weight:bold;
+}
+
+
+
+/*---------------------------------------------------*/
+
+.file-send input[type="submit"] {
+  display: none;
+}
+
+.file-send {
+  position: absolute;
+      top: 175px;
+      left: 110px;
+      -ms-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
+  overflow: hidden;
+  width: 150px;
+  height: 40px;
+  background: #fa5d41;
+  color: #fff;
+  text-align: center;
+}
+
+.file-send:hover {
+background: #fc9381;
+}
+
+.file-send label {
+display: block;
+position: relative;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+cursor: pointer;
+}
+
+.file-send span {
+line-height: 20px;
+font-weight:bold;
+}
+
+/*---------------------------------------------------*/
+
+.fill_db input[type="submit"] {
+  display: none;
+}
+
+.fill_db {
+  position: absolute;
+      top: 315px;
+      left: 110px;
+      -ms-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
+  overflow: hidden;
+  width: 150px;
+  height: 30px;
+  background: #fa5d41;
+  color: #fff;
+  text-align: center;
+}
+
+.fill_db:hover {
+background: #fc9381;
+}
+
+.fill_db label {
+display: block;
+position: relative;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+cursor: pointer;
+}
+
+.fill_db span {
+line-height: 30px;
+font-weight:bold;
+}
+
+/*---------------------------------------------------*/
+
+.file-name {
+  position: absolute;
+  top: 400px;
+  left: 40px;
+  width: 150px;
+  height: 500px;
+  text-align: center;
+}

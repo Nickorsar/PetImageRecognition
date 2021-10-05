@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <title> PicComp </title>
+      <link rel="stylesheet" href="css/index.css">
+      <meta charset="utf-8">
+  </head>
+
+  <body>
+    <div class="logo">
+    </div>
+
+  <form action="send.php" method="post" name="form1" enctype="multipart/form-data">
+    <div class="file-upload">
+      <label>
+        <span>Step 1: Choose your photo</span>
+        <input type="file" name="file" onchange="getFileName();" id="upload-file" accept=".jpg">
+      </label>
+    </div>
+    <br>
+
+    <div class="file-name">
+    <div id='file-name'>
+      Filename: *empty*
+      <script>
+        function getFileName()
+        {
+          var file = document.getElementById('upload-file').value;
+          file = file.replace(/\\/g, "/").split('/').pop();
+          document.getElementById('file-name').innerHTML='Filename: '+file;
+        }
+      </script>
+    </div>
+    </div>
+    <br>
+
+    <div class="file-send">
+      <label>
+        <span>Step 2: Send your photo</span>
+        <a href="results.html"><input type="submit" name="submit"></a>
+      </label>
+    </div>
+  </form>
+
+  </body>
+</html>

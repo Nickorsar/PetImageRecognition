@@ -1,0 +1,139 @@
+﻿<!DOCTYPE html>
+
+
+
+<html lang="en">
+<head>
+    <title> @ViewBag.Title </title>
+    <link rel="stylesheet" href="~/Content/upload_page.css">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+</head>
+
+<body>
+    <div class="all">
+        @*<div>@using (Html.BeginForm())
+        {
+
+        }
+        </div >*@
+        <div class="background-field"></div>
+        <div class="line-1"></div>
+        <div class="line-2"></div>
+        <div class="line-3"></div>
+        <div class="line-4"></div>
+        <div class="line-5"></div>
+        <div class="preview-zone"><span id="outputMulti"></span></div>
+        <style>
+            .preview-zone {
+                position: absolute;
+                top: 120px;
+                left: 250px;
+                width: 488px;
+                height: 314px;
+                overflow: scroll;
+                padding: 5px;
+                border: solid 1px black;
+                background: #8f8f8f
+            }
+
+            .img-thumbnail {
+                width: 110px;
+                border: 1px solid black;
+                margin: 1px 5px 0 0;
+            }
+        </style>
+
+        <div class="instruction">
+            There are a short guide how to fill database.
+            Firstly, click the "Step 1..." button to select pictures from the local file system.
+            Secondly, click the "Step 2..." button to send this pictures to the database.
+            If you want to return to main page, click the "Return..." button.
+        </div>
+        @using (Html.BeginForm("Upload", "Upload", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <div class="file-upload">
+                <label>
+                    <span>Step 1: Choose your photos</span>
+                    <input type="file" name="files" id="files" accept="image/jpeg, image/png" multiple />
+                    @*<input multiple type="file" name="file" onchange="getFileParam()" id="upload-file" accept="image/jpeg, image/png">*@
+                </label>
+            </div>
+                    
+            <script type="text/javascript">
+                    /*function getFileParam() // Получение названия одного файла :(
+                    {
+                        var file = document.getElementById('upload-file').value;
+                        file = file.replace(/\\/g, "/").split('/').pop();
+                        document.getElementById('file-name').innerHTML = 'Filename: ' + file;
+                    }*/
+                    function handleFileSelectMulti(evt)
+                    {
+                        var files = evt.target.files; // FileList object
+                        document.getElementById('outputMulti').innerHTML = "";
+                        for (var i = 0, f; f = files[i]; i++)
+                        {
+                            // Only process image files.
+                            if (!f.type.match('image.*'))
+                            {
+                                alert("Только изображения....");
+                            }
+                            var reader = new FileReader();
+
+                            // Closure to capture the file information.
+                            reader.onload = (function (theFile)
+                            {
+                                return function (e)
+                                {
+                                    // Render thumbnail.
+                                    var span = document.createElement('span');
+                                    span.innerHTML = ['<img class="img-thumbnail" src="', e.target.result,
+                                        '" title="', escape(theFile.name), '"/>'].join('');
+                                    document.getElementById('outputMulti').insertBefore(span, null);
+                                };
+                            })(f);
+                            // Read in the image file as a data URL.
+                            reader.readAsDataURL(f);
+                        }
+                    }
+                    document.getElementById('files').addEventListener('change', handleFileSelectMulti, false);
+             </script>
+
+            <div class="file-send">
+                <label>
+                    <span>Step 2: Confirm your choice</span>
+                    <input type="submit" name="submit">
+                </label>
+            </div>
+        }
+        @*<form method="post" enctype="multipart/form-data">*@
+
+        @if (ViewBag.Result != null)
+        {
+            <p>ViewBag.Result</p>
+        }
+
+        @*<div class="result">
+            @if (Model&&Model != null)
+            {
+                foreach(string path in Model)
+                {
+                    <p>@path</p>
+                }
+            }
+        </div>*@
+
+
+        <div class="returntomain">
+            @using (Html.BeginForm("Index", "Home", FormMethod.Get))
+            {
+                <label>
+                    <span>Return to main menu</span>
+                    <input type="submit" action="submit">
+                </label>
+            }
+        </div>
+    </div>
+</body>
+
+</html>

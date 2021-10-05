@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Controllers\DefaultController.cs" />
+    <Compile Remove="Controllers\MobileController.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Npgsql" Version="5.0.7" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="5.0.7" />
+    <PackageReference Include="OpenCvSharp4" Version="4.5.2.20210404" />
+    <PackageReference Include="OpenCvSharp4.runtime.win" Version="4.5.2.20210404" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="ImageRecognitionModule">
+      <HintPath>C:\Users\user\source\repos\ImageRecognitionModule\ImageRecognitionModule\bin\Release\net5.0\ImageRecognitionModule.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>
