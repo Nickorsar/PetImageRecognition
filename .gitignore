@@ -350,3 +350,66 @@ MigrationBackup/
 .ionide/
 **/Images/*.png
 **/Images/*.jpg
+# JPEG
+**/Images/*.jpg
+**/Images/*.jpeg
+**/Images/*.jpe
+**/Images/*.jif
+**/Images/*.jfif
+**/Images/*.jfi
+
+# JPEG 2000
+**/Images/*.jp2
+**/Images/*.j2k
+**/Images/*.jpf
+**/Images/*.jpx
+**/Images/*.jpm
+**/Images/*.mj2
+
+# JPEG XR
+**/Images/*.jxr
+**/Images/*.hdp
+**/Images/*.wdp
+
+# Graphics Interchange Format
+**/Images/*.gif
+
+# RAW
+**/Images/*.raw
+
+# Web P
+**/Images/*.webp
+
+# Portable Network Graphics
+**/Images/*.png
+
+# Animated Portable Network Graphics
+**/Images/*.apng
+
+# Multiple-image Network Graphics
+**/Images/*.mng
+
+# Tagged Image File Format
+**/Images/*.tiff
+**/Images/*.tif
+
+# Scalable Vector Graphics
+**/Images/*.svg
+**/Images/*.svgz
+
+# Portable Document Format
+**/Images/*.pdf
+
+# X BitMap
+**/Images/*.xbm
+
+# BMP
+**/Images/*.bmp
+**/Images/*.dib
+
+# ICO
+**/Images/*.ico
+
+# 3D Images
+**/Images/*.3dm
+**/Images/*.max
