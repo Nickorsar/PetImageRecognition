@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" media="screen" href="~/Content/searchnull.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="~/css/searchnull.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
     <title>Изображения не найдены :(</title>
 </head>
@@ -17,15 +17,14 @@
             <img src="~/Content/logo.png">
         </div>
         <div class="aboutus">
-            <a class="lnk" href="about.html">О нас</a>
-            <div class="filldatabase"><a class="lnk" href="fill.html">Для разработчиков</a></div>
+            <a class="lnk" href="/Home/About">О нас</a>
+            <div class="filldatabase"><a class="lnk" href="/Upload/Upload">Для разработчиков</a></div>
         </div>
         <img onclick="myFunction()" class="dropbtn" src="~/Content/menu.png">
         <div id="myDropdown" class="dropdown-content">
-            <a href="about.html">О нас</a>
-            <a href="fill.html">Для разработчиков</a>
+            <a href="/Home/About">О нас</a>
+            <a href="/Upload/Upload">Для разработчиков</a>
         </div>
-        </img>
 
         <script>
             function myFunction() {
@@ -62,18 +61,22 @@
 
         <div class="blue-zone">
             <div class="preview">
-                <img src="data:image;base64, @ViewBag.Image" height="175">
-                <div class="description">Результаты поиска: 0</div>
-                <div class="filename">
-                    К несчастью, ImageSearch не смог найти похожих изображений в базе :(
-                    <br><br>
-                    Но вы можете попробовать снова через какое-то время.
-                    Возможно, к тому времени, база изображений обновится и вы сможете найти
-                    интересующие вас изображения.
+                <img src="data:image;base64, @ViewBag.Image" height="155">
+                <div class="description">
+                    Результаты поиска: 0
+                    <div class="filename">
+                        К несчастью, ImageSearch не смог найти похожих изображений в базе :(
+                        <br><br>
+                        Но вы можете попробовать снова через какое-то время.
+                        Возможно, к тому времени, база изображений обновится и вы сможете найти
+                        интересующие вас изображения.
+                    </div>
                 </div>
+                
             </div>
+            
         </div>
-    </div>
+        </div>
 
 </body>
 </html>

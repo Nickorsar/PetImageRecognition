@@ -47,8 +47,9 @@ namespace WebApp.Models
                 var imageRecognition = new ImageRecognition(new ImageRecognitionParameters
                 {
                     DatabaseDSN = "Server=127.0.0.1;User Id=postgres;Password=12345;Port=5432;Database=image-recognition;",
-                    MaxDistance = 60,
-                    MinMatches = 10
+                    MaxDistance = 250,
+                    MinMatches = 5,
+                    MaxWidth = 1024
                 });
                 if (file == null) throw new Exception();
                 string fileName = System.IO.Path.GetFileName(file.FileName);
@@ -69,27 +70,27 @@ namespace WebApp.Models
 
                 ViewBag.Image = base64;
 
-                List<string> files = new();
+                //List<string> files = new();
 
-                var sql = "SELECT * FROM image_descriptors";
-                using var connection = new NpgsqlConnection(imageRecognition._connectionDsn);
-                connection.Open();
+                //var sql = "SELECT * FROM image_descriptors";
+                //using var connection = new NpgsqlConnection(imageRecognition._connectionDsn);
+                //connection.Open();
 
-                using var cmd = new NpgsqlCommand(sql, connection);
-                using NpgsqlDataReader reader = cmd.ExecuteReader();
+               // using var cmd = new NpgsqlCommand(sql, connection);
+               // using NpgsqlDataReader reader = cmd.ExecuteReader();
 
-                while (reader.Read())
-                {
-                    files.Add(reader.GetString(1));
-                }
+               // while (reader.Read())
+               // {
+               //     files.Add(reader.GetString(1));
+               // }
 
-                Debug.WriteLine(files.Count + " изображений");
-                foreach(var path in files)
-                {
-                    Debug.WriteLine(path);
-                }
+                //Debug.WriteLine(files.Count + " изображений");
+                //foreach(var path in files)
+                //{
+                //    Debug.WriteLine(path);
+                //}
 
-                var similar = imageRecognition.FindSimilar(file.OpenReadStream(), files);
+                var similar = imageRecognition.FindSimilar(file.OpenReadStream());
                 //foreach (var image in similar)
                 //{
                 //    Debug.WriteLine(image.path);

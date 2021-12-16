@@ -37,31 +37,32 @@ namespace WebApplication4.Controllers
             try
             {
                 if (!System.IO.File.Exists(PathString)) throw new Exception("Файл не найден");
-                // var descriptors = PictureUtils.GetPHash(Server.MapPath(Path), 128);
+               // var descriptors = PictureUtils.GetPHash(Server.MapPath(Path), 128);
 
-                // var descriptors = PictureUtils.ComputeDescriptors(Path);
-                //if (descriptors == null) throw new Exception("Не вычислились дескрипторы");
-                //Debug.WriteLine(descriptors.Length + "элементов в массиве");
+                var descriptors = PictureUtils.ComputeDescriptors(fs, 512);
+                if (descriptors == null) throw new Exception("Не вычислились дескрипторы");
+                Debug.WriteLine(descriptors.Length + "элементов в массиве");
 
-                //string descriptorsString = "{";
-                //for (int i = 0; i < descriptors.Length; i++)
-                //{
-                //    Debug.WriteLine(i+ " из " + descriptors.Length);
-                //    descriptorsString += Convert.ToInt32(descriptors[i]).ToString();
-                //    if (i + 1 != descriptors.Length) descriptorsString += ",";
-                //    else descriptorsString += "}";
-                //}
 
-                // string md5 = PictureUtils.GetMD5Hash(Server.MapPath(Path));
-                
-                var sql = $"INSERT INTO image_descriptors(path) VALUES('{PathStringRoot}')";
+                var sql = $"INSERT INTO image_descriptors(path, descriptor) VALUES('{PathStringRoot}', @descriptor)";
                 using (var connection = new NpgsqlConnection("Server=127.0.0.1;User Id=postgres;Password=12345;Port=5432;Database=image-recognition;"))
                 {
-                    connection.Open();
-                    using (var cmd = new NpgsqlCommand(sql, connection)) { cmd.ExecuteNonQuery(); }
+                    
+                    using (var cmd = new NpgsqlCommand(sql, connection)) 
+                    {
+                        NpgsqlParameter param = cmd.CreateParameter();
+                        param.ParameterName = "@descriptor";
+                        param.NpgsqlDbType = NpgsqlTypes.NpgsqlDbType.Bytea;
+                        param.Value = descriptors;
+                        cmd.Parameters.Add(param);
+                        
+                        connection.Open();
+                        cmd.Prepare();
+                        cmd.ExecuteNonQuery();
+                    }
                 }
 
-
+                fs.Close();
                 return true;
             }
             catch (Exception ex) {fs.Close(); Debug.WriteLine(ex.ToString()); return false; }
@@ -69,8 +70,11 @@ namespace WebApplication4.Controllers
         }
 
         [HttpPost]
+        [DisableRequestSizeLimit]
         public ActionResult Upload(IFormFileCollection files)
         {
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
             foreach (var file in files)
             {
                 if (file != null)
@@ -96,7 +100,8 @@ namespace WebApplication4.Controllers
                     }
                 }
             }
-            
+            stopwatch.Stop();
+            Debug.WriteLine(stopwatch.ElapsedMilliseconds / 1000f+"sec");
             return View("Upload");
         }
 
