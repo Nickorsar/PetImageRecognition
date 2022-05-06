@@ -18,7 +18,7 @@ namespace WebApplication4.Controllers
 {
     public class UploadController : Controller
     {
-        string AllowedTypes = "image/jpeg | image/png | image/bmp";
+        readonly string AllowedTypes = "image/jpeg | image/png | image/bmp";
         private readonly IHostEnvironment _env;
 
         public UploadController(IHostEnvironment env)
